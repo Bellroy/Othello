@@ -3,14 +3,14 @@
 
 const Side my_side = BLACK;
 const Side opp_side = WHITE;
-const int board_values[8][8] = {{5,-3,3,3,3,3,-3,5},
-                                {-3,-5,1,1,1,1,-5,-3},
-                                {3,1,1,1,1,1,1,3},
-                                {3,1,1,1,1,1,1,3},
-                                {3,1,1,1,1,1,1,3},
-                                {3,1,1,1,1,1,1,3},
-                                {-3,-5,1,1,1,1,-5,-3},
-                                {5,-3,3,3,3,3,-3,5}};
+const int board_values[8][8] = {{3,-2,2,2,2,2,-2,3},
+                                {-2,-3,1,1,1,1,-3,-2},
+                                {2,1,1,1,1,1,1,2},
+                                {2,1,1,1,1,1,1,2},
+                                {2,1,1,1,1,1,1,2},
+                                {2,1,1,1,1,1,1,2},
+                                {-2,-3,1,1,1,1,-3,-2},
+                                {3,-2,2,2,2,2,-2,3}};
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish 
