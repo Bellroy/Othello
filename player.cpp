@@ -1,8 +1,8 @@
 #include "player.h"
 #include <chrono>
 
-const Side my_side = BLACK;
-const Side opp_side = WHITE;
+Side my_side = WHITE;
+Side opp_side = BLACK;
 const int board_values[8][8] = {{5,-2,2,2,2,2,-2,5},
                                 {-2,-3,1,1,1,1,-3,-2},
                                 {2,1,1,1,1,1,1,2},
@@ -20,7 +20,10 @@ Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
     my_board = Board();
-
+    if(side == BLACK) {
+        my_side = BLACK;
+        opp_side = WHITE;
+    }
 }
 
 /*
@@ -44,33 +47,122 @@ Player::~Player() {
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
 
     my_board.doMove(opponentsMove, opp_side);
-    Move* my_move = Player::getBestMove();
-    if (my_move) {
-        my_board.doMove(my_move, my_side);
+    if (testingMinimax) {
+        Move* my_move = Player::miniMaxNaive();
+        if (my_move) {
+            my_board.doMove(my_move, my_side);
+        }
+        return my_move;
+    } else {
+        Move *my_move = Player::miniMax();
+        if (my_move) {
+            my_board.doMove(my_move, my_side);
+        }
+        return my_move;
     }
-    return my_move;
 }
 
-Move* Player::getBestMove() {
-    std::vector<Move*> moves = Player::possibleMoves(my_side);
+/*
+ * Computes best move based off of a single heuristic score
+ */
+Move* Player::singleHeuristic() {
+    std::vector<Move*> moves = Player::possibleMoves(my_board, my_side);
     Move* best = NULL;
     if (moves.size() > 0) {
         best = moves[0];
         for (int i = 0; i < moves.size(); ++i) {
-            if (Player::heuristic(moves[i], my_side) >
-                    Player::heuristic(moves[0], my_side)) {
+            if (Player::heuristic(my_board, moves[i], my_side) >
+                    Player::heuristic(my_board, moves[0], my_side)) {
                 best = moves[i];
             }
         }
     } return best;
 
 }
-std::vector<Move *> Player::possibleMoves(Side side){
+/*
+ * Gets the best move based on the minmax technique
+ */
+Move* Player::miniMax(){
+    std::vector<Move*> ply1_moves = Player::possibleMoves(my_board, my_side);
+    if (ply1_moves.size() == 0) {
+        return NULL;
+    } else {
+        std::vector < Move * > ply2_moves;
+        int values[ply1_moves.size()];
+        for (int i = 0; i < ply1_moves.size(); i++) {
+            values[i] = Player::heuristic(my_board, ply1_moves[i], my_side);
+        }
+        for (int i = 0; i < ply1_moves.size(); i++) {
+            Board *potential_board = my_board.copy();
+            potential_board->doMove(ply1_moves[i], my_side);
+            ply2_moves = Player::possibleMoves(*potential_board, opp_side);
+            for (int j = 0; j < ply2_moves.size(); ++j) {
+                if (Player::heuristic(*potential_board, ply2_moves[j], opp_side)
+                    < values[i]) {
+                    values[i] =
+                            Player::heuristic(*potential_board,
+                                              ply2_moves[j], opp_side);
+                }
+            }
+        }
+        int highest = 0;
+        for (int i = 0; i < ply1_moves.size(); ++i) {
+            if (values[i] > values[highest]) {
+                highest = i;
+            }
+        }
+        return ply1_moves[highest];
+    }
+}
+
+/*
+ * Gets the best move based on the minmax technique using the naive heuristic
+ */
+Move* Player::miniMaxNaive(){
+    std::vector<Move*> ply1_moves = Player::possibleMoves(my_board, my_side);
+    if (ply1_moves.size() == 0) {
+        return NULL;
+    } else {
+        std::vector < Move * > ply2_moves;
+        int values[ply1_moves.size()];
+        for (int i = 0; i < ply1_moves.size(); i++) {
+            values[i] = Player::naiveHeuristic(my_board,
+                                               ply1_moves[i], my_side);
+        }
+        for (int i = 0; i < ply1_moves.size(); i++) {
+            Board *potential_board = my_board.copy();
+            potential_board->doMove(ply1_moves[i], my_side);
+            ply2_moves = Player::possibleMoves(*potential_board, opp_side);
+            for (int j = 0; j < ply2_moves.size(); ++j) {
+                if (Player::naiveHeuristic(*potential_board, ply2_moves[j],
+                                           opp_side) < values[i]) {
+                    values[i] =
+                            Player::naiveHeuristic(*potential_board,
+                                              ply2_moves[j], opp_side);
+                }
+            }
+        }
+        int highest = 0;
+        for (int i = 0; i < ply1_moves.size(); ++i) {
+            if (values[i] > values[highest]) {
+                highest = i;
+            }
+        }
+        return ply1_moves[highest];
+    }
+}
+
+/*
+ * Finds all possible moves for a given side
+ *
+ * Returns a vector of pointers to each move
+ */
+std::vector<Move *> Player::possibleMoves(Board board, Side side){
     std::vector<Move*> moves;
     for (int i = 0; i < 8; ++i) {
         for (int j = 0; j < 8; ++j) {
             Move *m = new Move(i,j);
-            if(my_board.checkMove(m, side)) {
+            if(board.checkMove(m, side)) {
                 moves.push_back(m);
             }
         }
@@ -78,8 +170,13 @@ std::vector<Move *> Player::possibleMoves(Side side){
     return moves;
 }
 
-int Player::heuristic(Move *potential_move, Side side) {
-    Board *potential_board = my_board.copy();
+/*
+ * Calculates a score based on a given move played on the current board
+ *
+ * Returns an int value of the score--bigger is better!
+ */
+int Player::heuristic(Board board, Move *potential_move, Side side) {
+    Board *potential_board = board.copy();
     potential_board->doMove(potential_move, side);
     int my_score = 0, opp_score = 0;
 
@@ -94,4 +191,14 @@ int Player::heuristic(Move *potential_move, Side side) {
         }
     }
     return my_score - opp_score;
+}
+
+/*
+ * Calculates a score based on the number of pieces on the board
+ */
+int Player::naiveHeuristic(Board board, Move *potential_move, Side side) {
+    Board *potential_board = board.copy();
+    potential_board->doMove(potential_move, side);
+
+    return potential_board->countBlack() - potential_board->countWhite();
 }
