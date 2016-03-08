@@ -1,5 +1,16 @@
 #include "player.h"
+#include <chrono>
 
+const Side my_side = BLACK;
+const Side opp_side = WHITE;
+const int board_values[8][8] = {{5,-3,3,3,3,3,-3,5},
+                                {-3,-5,1,1,1,1,-5,-3},
+                                {3,1,1,1,1,1,1,3},
+                                {3,1,1,1,1,1,1,3},
+                                {3,1,1,1,1,1,1,3},
+                                {3,1,1,1,1,1,1,3},
+                                {-3,-5,1,1,1,1,-5,-3},
+                                {5,-3,3,3,3,3,-3,5}};
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish 
@@ -8,12 +19,8 @@
 Player::Player(Side side) {
     // Will be set to true in test_minimax.cpp.
     testingMinimax = false;
+    my_board = Board();
 
-    /* 
-     * TODO: Do any initialization you need to do here (setting up the board,
-     * precalculating things, etc.) However, remember that you will only have
-     * 30 seconds.
-     */
 }
 
 /*
@@ -35,9 +42,55 @@ Player::~Player() {
  * return NULL.
  */
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
-    /* 
-     * TODO: Implement how moves your AI should play here. You should first
-     * process the opponent's opponents move before calculating your own move
-     */ 
-    return NULL;
+    my_board.doMove(opponentsMove, opp_side);
+    Move* my_move = Player::getBestMove();
+    if (my_move) {
+        my_board.doMove(my_move, my_side);
+    }
+    return my_move;
+
+}
+Move* Player::getBestMove() {
+    std::vector<Move*> moves = Player::possibleMoves(my_side);
+    Move* best = NULL;
+    if (moves.size() > 0) {
+        best = moves[0];
+        for (int i = 0; i < moves.size(); ++i) {
+            if (Player::heuristic(moves[i], my_side) >
+                    Player::heuristic(moves[0], my_side)) {
+                best = moves[i];
+            }
+        }
+    } return best;
+
+}
+std::vector<Move *> Player::possibleMoves(Side side){
+    std::vector<Move*> moves;
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            Move *m = new Move(i,j);
+            if(my_board.checkMove(m, side)) {
+                moves.push_back(m);
+            }
+        }
+    }
+    return moves;
+}
+
+int Player::heuristic(Move *potential_move, Side side) {
+    Board *potential_board = my_board.copy();
+    potential_board->doMove(potential_move, side);
+    int my_score = 0, opp_score = 0;
+
+    for (int i = 0; i < 8; ++i) {
+        for (int j = 0; j < 8; ++j) {
+            if(potential_board->get(my_side, i, j)) {
+                my_score += board_values[i][j];
+            }
+            if (potential_board->get(opp_side, i, j)){
+                opp_score += board_values[i][j];
+            }
+        }
+    }
+    return my_score - opp_score;
 }
