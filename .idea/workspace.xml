@@ -10,17 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04cc1161-d06f-411f-a4b8-b43cffe2203d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Meep_Meep" afterPath="$PROJECT_DIR$/Meep_Meep" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board.o" afterPath="$PROJECT_DIR$/board.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.o" afterPath="$PROJECT_DIR$/player.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testgame" afterPath="$PROJECT_DIR$/testgame" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testgame.o" afterPath="$PROJECT_DIR$/testgame.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wrapper.o" afterPath="$PROJECT_DIR$/wrapper.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board.cpp" afterPath="$PROJECT_DIR$/board.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.cpp" afterPath="$PROJECT_DIR$/player.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.h" afterPath="$PROJECT_DIR$/player.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testminimax.cpp" afterPath="$PROJECT_DIR$/testminimax.cpp" />
     </list>
     <ignored path="Othello.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -207,7 +197,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457440521265</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Applied 2ply depth heuristic to my AI, passed testminimax test">
+      <created>1457444909238</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1457444909238</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -249,7 +245,8 @@
     <MESSAGE value="Testing IDE Commit" />
     <MESSAGE value="Determining best heuristic values&#10;" />
     <MESSAGE value="Found very stable heuristic values &#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Found very stable heuristic values &#10;" />
+    <MESSAGE value="Applied 2ply depth heuristic to my AI, passed testminimax test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Applied 2ply depth heuristic to my AI, passed testminimax test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
