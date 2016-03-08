@@ -3,14 +3,14 @@
 
 const Side my_side = BLACK;
 const Side opp_side = WHITE;
-const int board_values[8][8] = {{3,-2,2,2,2,2,-2,3},
+const int board_values[8][8] = {{5,-2,2,2,2,2,-2,5},
                                 {-2,-3,1,1,1,1,-3,-2},
                                 {2,1,1,1,1,1,1,2},
                                 {2,1,1,1,1,1,1,2},
                                 {2,1,1,1,1,1,1,2},
                                 {2,1,1,1,1,1,1,2},
                                 {-2,-3,1,1,1,1,-3,-2},
-                                {3,-2,2,2,2,2,-2,3}};
+                                {5,-2,2,2,2,2,-2,5}};
 /*
  * Constructor for the player; initialize everything here. The side your AI is
  * on (BLACK or WHITE) is passed in as "side". The constructor must finish 
@@ -42,14 +42,15 @@ Player::~Player() {
  * return NULL.
  */
 Move *Player::doMove(Move *opponentsMove, int msLeft) {
+
     my_board.doMove(opponentsMove, opp_side);
     Move* my_move = Player::getBestMove();
     if (my_move) {
         my_board.doMove(my_move, my_side);
     }
     return my_move;
-
 }
+
 Move* Player::getBestMove() {
     std::vector<Move*> moves = Player::possibleMoves(my_side);
     Move* best = NULL;

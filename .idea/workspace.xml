@@ -10,12 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="04cc1161-d06f-411f-a4b8-b43cffe2203d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board.o" afterPath="$PROJECT_DIR$/board.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Meep_Meep" afterPath="$PROJECT_DIR$/Meep_Meep" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.o" afterPath="$PROJECT_DIR$/player.o" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board.cpp" afterPath="$PROJECT_DIR$/board.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board.h" afterPath="$PROJECT_DIR$/board.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.cpp" afterPath="$PROJECT_DIR$/player.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player.h" afterPath="$PROJECT_DIR$/player.h" />
     </list>
@@ -41,8 +38,8 @@
       <file leaf-file-name="player.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/player.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3877551">
-              <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.16666667">
+              <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -52,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/player.h">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -104,8 +101,8 @@
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/board.cpp" />
-        <option value="$PROJECT_DIR$/player.h" />
         <option value="$PROJECT_DIR$/board.h" />
+        <option value="$PROJECT_DIR$/player.h" />
         <option value="$PROJECT_DIR$/player.cpp" />
       </list>
     </option>
@@ -211,7 +208,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457417562127</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Determining best heuristic values&#10;">
+      <created>1457438128476</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1457438128476</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -251,7 +254,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing IDE Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing IDE Commit" />
+    <MESSAGE value="Determining best heuristic values&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Determining best heuristic values&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -284,14 +288,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/board.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.333333">
@@ -308,10 +304,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/player.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/player.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3877551">
-          <caret line="63" column="18" selection-start-line="63" selection-start-column="18" selection-end-line="63" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.16666667">
+          <caret line="11" column="52" selection-start-line="11" selection-start-column="52" selection-end-line="11" selection-end-column="52" />
           <folding />
         </state>
       </provider>

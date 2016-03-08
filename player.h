@@ -5,6 +5,7 @@
 #include "common.h"
 #include "board.h"
 #include <vector>
+
 using namespace std;
 
 class Player {
@@ -18,7 +19,7 @@ public:
     int heuristic(Move* potential_move, Side side);
     Move* getBestMove();
     Board my_board;
-    
+
 
     // Flag to tell if the player is running within the test_minimax context
     bool testingMinimax;
